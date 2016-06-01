@@ -24,3 +24,9 @@ You can also find us on #buildroot on Freenode IRC.
 
 If you would like to contribute patches, please read
 https://buildroot.org/manual.html#submitting-patches
+
+## 新加python运行环境
+
+1. 加入python-pycurl package.
+2. 加入 make rootfs path=/work/ 以root权限生成rootfs.
+3. make help 查看.

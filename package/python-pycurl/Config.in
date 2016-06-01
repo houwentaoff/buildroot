@@ -1,0 +1,10 @@
+config BR2_PACKAGE_PYTHON_PYCURL
+        bool "python-pycurl"
+        select BR2_PACKAGE_GNUTLS
+        select BR2_PACKAGE_LIBCURL 
+##        select BR2_PACKAGE_OPENSSL
+        help
+          pycurl is a collection of curl algorithms and
+          protocols, implemented for use from Python.
+
+          http://foosoftware.org/libfoo/

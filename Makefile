@@ -40,6 +40,21 @@ else # umask
 # This is our default rule, so must come first
 all:
 
+define INSTALL_ROOTFS
+	mkdir -p $(path); \
+	sudo cp -a $(TARGET_DIR) $(path)/; \
+	sudo chmod 777 $(path)/target -R; \
+	rm $(path)/target/dev/console -f; \
+	sudo mknod $(path)/target/dev/console c 5 1; \
+	mkdir -p $(path)/rootfs; \
+	sudo cp -a $(path)/target/* $(path)/rootfs/ -rf; \
+	rm $(path)/target -rf;
+endef
+
+rootfs:
+	@echo "mk rootfs $(TARGET_DIR) ==> $(path)/rootfs "
+	if [ ! -d "$(path)" -a -z "$(path)" ];then echo "create rootfs fail ";exit 1;else $(INSTALL_ROOTFS) fi
+
 # Set and export the version string
 export BR2_VERSION := 2016.08-git
 
@@ -977,6 +992,10 @@ endif
 	@echo
 	@echo 'For further details, see README, generate the Buildroot manual, or consult'
 	@echo 'it on-line at http://buildroot.org/docs.html'
+	@echo
+	@echo 'add by joy'
+	@echo '  make rootfs path=destpath    - generate rootfs in the place you specify ' 
+	@echo '  eg: make rootfs path=/work   - generate rootfs in /work/rootfs'
 	@echo
 
 list-defconfigs:
