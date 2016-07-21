@@ -30,3 +30,8 @@ https://buildroot.org/manual.html#submitting-patches
 1. 加入python-pycurl package.
 2. 加入 make rootfs path=/work/ 以root权限生成rootfs.
 3. make help 查看.
+
+## note
+**在使用过程中会遇到文件夹位置发生变化，比如将当前的工程连同buildroot copy到新的路径下，这时候会出现由于arm-buildroot-linux-ld等一系列工具找不到当时编译交叉工具链的rpath．2个地方需要更改**
+1. 软链接失效buildroot/output/staging 需要重新链接.
+2. buildroot/output/host下的所有程序的rpath为路径改变前的旧路径，只需建立一个新的软链接到目前的output/host目录即可.
